@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { TextField, Button, Typography, Paper } from '@material-ui/core';
 import FileBase from 'react-file-base64';
+import { createPost } from '../../actions/posts';
 import useStyles from './styles';
 
 const Form = () => {
     const classes = useStyles();
+    const dispatch = useDispatch();
     const [postData, setPostData] = useState({
         creator: '',
         title: '',
@@ -13,8 +16,9 @@ const Form = () => {
         selectedFile: '',
     });
 
-    const handleSubmit = () => {
-
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        dispatch(createPost(postData));
     };
 
     const handleClear = () => {
@@ -47,12 +51,12 @@ const Form = () => {
                     onChange={(e) => setPostData({ ...postData, title: e.target.value })}
                 />
                 <TextField
-                    name="messages"
+                    name="message"
                     variant="outlined"
-                    label="Messages"
+                    label="message"
                     fullWidth
-                    value={postData.messages}
-                    onChange={(e) => setPostData({ ...postData, messages: e.target.value })}
+                    value={postData.message}
+                    onChange={(e) => setPostData({ ...postData, message: e.target.value })}
                 />
                 <TextField
                     name="tags"
