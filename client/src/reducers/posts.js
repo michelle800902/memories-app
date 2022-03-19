@@ -7,6 +7,7 @@ export default (posts = [], action) => {
             console.log('--- CREATE ---', action);
             return [...posts, action.payload];
         case 'UPDATE':
+        case 'LIKE':
             console.log('--- UPDATE ---', action);
             return posts.map((post) => post._id === action.payload._id ? action.payload : post);
         case 'DELETE':
