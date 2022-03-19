@@ -9,6 +9,9 @@ export default (posts = [], action) => {
         case 'UPDATE':
             console.log('--- UPDATE ---', action);
             return posts.map((post) => post._id === action.payload._id ? action.payload : post);
+        case 'DELETE':
+            console.log('--- DELETE ---', action);
+            return posts.filter((post) => post._id !== action.payload);
         default:
             return posts;
     }
